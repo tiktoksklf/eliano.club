@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Eliano Pricing</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(255,140,60,0.2), transparent 30%),
+        #050505;
+      color: white;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+
+    .accent {
+      color: #f2b164;
+    }
+
+    .sub {
+      text-align: center;
+      color: #aaa;
+      margin-bottom: 60px;
+      font-size: 18px;
+    }
+
+    .pricing {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    .card {
+      background: #0d0d0d;
+      border-radius: 20px;
+      padding: 30px;
+      border: 1px solid #222;
+      box-shadow: 0 0 40px rgba(0,0,0,0.6);
+    }
+
+    .card.featured {
+      border: 1px solid #f2b164;
+      box-shadow: 0 0 30px rgba(242,177,100,0.2);
+    }
+
+    .plan {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .price {
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
+
+    .price span {
+      font-size: 16px;
+      color: #aaa;
+    }
+
+    .desc {
+      color: #bbb;
+      margin-bottom: 25px;
+    }
+
+    ul {
+      list-style: none;
+      margin-bottom: 30px;
+    }
+
+    ul li {
+      margin-bottom: 12px;
+      color: #ddd;
+    }
+
+    ul li::before {
+      content: "✔ ";
+      color: #f2b164;
+    }
+
+    .btn {
+      display: block;
+      text-align: center;
+      padding: 15px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: bold;
+      background: #1a1a1a;
+      border: 1px solid #333;
+      color: white;
+    }
+
+    .btn:hover {
+      background: #222;
+    }
+
+    .btn.primary {
+      background: #f2b164;
+      color: black;
+      border: none;
+    }
+
+    .btn.primary:hover {
+      background: #ffcc7a;
+    }
+
+    @media(max-width: 800px) {
+      .pricing {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>Simple <span class="accent">Pricing</span></h1>
+    <p class="sub">Start free or unlock the full system and take trading seriously.</p>
+
+    <div class="pricing">
+
+      <!-- FREE PLAN -->
+      <div class="card">
+        <div class="plan">Starter</div>
+        <div class="price">$0 <span>/month</span></div>
+        <p class="desc">Get introduced to trading without risk.</p>
+
+        <ul>
+          <li>Basic trading education</li>
+          <li>Beginner strategy overview</li>
+          <li>Weekly tips & insights</li>
+          <li>Mindset training basics</li>
+          <li>Email support</li>
+        </ul>
+
+        <a href="#" class="btn">Start Free</a>
+      </div>
+
+      <!-- PAID PLAN -->
+      <div class="card featured">
+        <div class="plan">Pro Mentorship</div>
+        <div class="price">$200 <span>/month</span></div>
+        <p class="desc">For traders who want real results and structure.</p>
+
+        <ul>
+          <li>Everything in Starter</li>
+          <li>Full 4-step trading system</li>
+          <li>Private community access</li>
+          <li>Live trade breakdowns</li>
+          <li>Risk management training</li>
+          <li>High-probability setups</li>
+          <li>Direct mentorship access</li>
+          <li>Priority support</li>
+        </ul>
+
+        <a href="#" class="btn primary">Join Now</a>
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>

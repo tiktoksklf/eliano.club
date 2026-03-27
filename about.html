@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Zaso</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(255, 140, 60, 0.20), transparent 30%),
+        radial-gradient(circle at top right, rgba(120, 20, 20, 0.22), transparent 25%),
+        #050505;
+      color: white;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: radial-gradient(rgba(255,255,255,0.12) 1px, transparent 1px);
+      background-size: 160px 160px;
+      opacity: 0.16;
+    }
+
+    .container {
+      max-width: 1150px;
+      margin: auto;
+      padding: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .nav-wrap {
+      display: flex;
+      justify-content: center;
+      padding-top: 16px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      width: 100%;
+      max-width: 1100px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      background: rgba(10,10,10,0.95);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .brand-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ffca7a, #c8612c 60%, #5b1717);
+      box-shadow: 0 0 18px rgba(255, 166, 74, 0.28);
+    }
+
+    .brand em {
+      font-style: normal;
+      color: #f2b164;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: rgba(255,255,255,0.88);
+      font-size: 14px;
+    }
+
+    .nav-links a:hover {
+      color: white;
+    }
+
+    .nav-btn {
+      display: inline-block;
+      text-decoration: none;
+      color: #111;
+      background: white;
+      padding: 13px 22px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .hero {
+      padding: 85px 0 50px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      color: rgba(255,255,255,0.72);
+      font-size: 13px;
+      margin-bottom: 16px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(42px, 6vw, 78px);
+      line-height: 1.05;
+      letter-spacing: -0.045em;
+      margin-bottom: 22px;
+    }
+
+    .accent {
+      color: #f2b164;
+    }
+
+    .hero p {
+      color: rgba(255,255,255,0.86);
+      font-size: 20px;
+      line-height: 1.65;
+      max-width: 700px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      padding: 16px 24px;
+      border-radius: 16px;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(180deg, #f2b164, #d89343);
+      color: #111;
+      box-shadow: 0 10px 28px rgba(242, 177, 100, 0.22);
+    }
+
+    .btn-secondary {
+      color: white;
+      background: #111;
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .hero-card {
+      background: linear-gradient(180deg, rgba(18,18,18,0.96), rgba(8,8,8,0.96));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: 0 22px 70px rgba(0,0,0,0.48);
+    }
+
+    .hero-card-top {
+      aspect-ratio: 4 / 5;
+      border-radius: 22px;
+      background:
+        linear-gradient(rgba(0,0,0,0.18), rgba(0,0,0,0.34)),
+        url("https://images.unsplash.com/photo-1559526324-593bc073d938?auto=format&fit=crop&w=900&q=80") center/cover no-repeat;
+      display: flex;
+      align-items: flex-end;
+      padding: 18px;
+      margin-bottom: 18px;
+    }
+
+    .hero-card-label {
+      background: rgba(0,0,0,0.55);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 10px 14px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .stat-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .stat-box {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 18px;
+      padding: 16px 18px;
+    }
+
+    .stat-box h3 {
+      font-size: 28px;
+      margin-bottom: 6px;
+      color: #f2b164;
+    }
+
+    .stat-box p {
+      color: rgba(255,255,255,0.72);
+      line-height: 1.55;
+      font-size: 15px;
+    }
+
+    .section {
+      padding: 90px 0 10px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: clamp(32px, 4vw, 54px);
+      line-height: 1.1;
+      letter-spacing: -0.035em;
+      max-width: 850px;
+      margin: 0 auto 18px;
+    }
+
+    .section-copy {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto;
+      color: rgba(255,255,255,0.74);
+      line-height: 1.75;
+      font-size: 18px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 42px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(18,18,18,0.96), rgba(8,8,8,0.96));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 26px;
+      padding: 30px;
+      box-shadow: 0 14px 50px rgba(0,0,0,0.35);
+    }
+
+    .card h3 {
+      font-size: 25px;
+      margin-bottom: 14px;
+      letter-spacing: -0.02em;
+    }
+
+    .card p,
+    .card li {
+      color: rgba(255,255,255,0.78);
+      line-height: 1.75;
+      font-size: 16px;
+    }
+
+    .card ul {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .card li::before {
+      content: "• ";
+      color: #f2b164;
+      font-weight: bold;
+    }
+
+    .quote-section {
+      padding: 110px 0 100px;
+    }
+
+    .quote-box {
+      max-width: 950px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 56px 28px;
+      border-radius: 32px;
+      background:
+        radial-gradient(circle at top, rgba(242,177,100,0.14), transparent 42%),
+        linear-gradient(180deg, rgba(18,18,18,0.98), rgba(8,8,8,0.98));
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 28px 90px rgba(0,0,0,0.46);
+    }
+
+    .quote-box h2 {
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+    }
+
+    .quote-box p {
+      max-width: 760px;
+      margin: auto;
+      color: rgba(255,255,255,0.76);
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    .footer {
+      text-align: center;
+      color: rgba(255,255,255,0.42);
+      font-size: 14px;
+      padding: 24px 0 42px;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        padding-top: 50px;
+      }
+
+      .nav-btn {
+        padding: 11px 16px;
+        font-size: 13px;
+      }
+
+      .card,
+      .hero-card,
+      .quote-box {
+        border-radius: 22px;
+      }
+
+      .hero p {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav-wrap">
+      <nav class="nav">
+        <div class="brand">
+          <div class="brand-icon"></div>
+          <span><em>Eliano</em> Trading</span>
+        </div>
+
+        <ul class="nav-links">
+          <li><a href="#story">My Story</a></li>
+          <li><a href="#mission">Mission</a></li>
+          <li><a href="#why">Why Me</a></li>
+        </ul>
+
+        <a href="#connect" class="nav-btn">Work With Me →</a>
+      </nav>
+    </div>
+
+    <section class="hero">
+      <div>
+        <div class="eyebrow">About Me</div>
+        <h1>
+          Meet <span class="accent">Zaso</span> — The Trader Building
+          A Brand Around Results, Confidence, And Discipline
+        </h1>
+        <p>
+          I go by Zaso, and by 18 years old I had made over $300,000 trading.
+          What started as curiosity turned into an obsession with learning markets,
+          understanding price action, managing risk, and building real confidence
+          through experience. Now I’m building something bigger than trading alone —
+          a brand that helps people think sharper, move smarter, and level up.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#mission" class="btn btn-primary">Read My Story</a>
+          <a href="#connect" class="btn btn-secondary">Connect With Me</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="hero-card-top">
+          <div class="hero-card-label">Focused On Discipline • Risk • Results</div>
+        </div>
+
+        <div class="stat-list">
+          <div class="stat-box">
+            <h3>$300,000+</h3>
+            <p>Made through trading by 18 years old.</p>
+          </div>
+
+          <div class="stat-box">
+            <h3>18</h3>
+            <p>Young, aggressive, and committed to building a real legacy early.</p>
+          </div>
+
+          <div class="stat-box">
+            <h3>Zaso</h3>
+            <p>A name built around ambition, confidence, and making an impact.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="story">
+      <h2 class="section-title">
+        I Didn’t Want Average —
+        <span class="accent">I Wanted More</span>
+      </h2>
+      <p class="section-copy">
+        I got into trading because I knew there had to be a bigger path.
+        I wanted freedom, control, and the ability to create my own future.
+        Trading gave me a lane where discipline and decision-making actually mattered.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>How It Started</h3>
+          <p>
+            I started learning the markets young, putting time into understanding
+            how moves happen, where people get emotional, and how risk separates
+            gamblers from real traders. I wasn’t interested in looking busy —
+            I wanted to actually understand how to win.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>What I Learned Early</h3>
+          <p>
+            Trading is not just about entries. It’s about patience, confidence,
+            emotional control, and having the discipline to stay consistent when
+            most people panic, hesitate, or chase.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="mission">
+      <h2 class="section-title">
+        My Mission Is Bigger Than
+        <span class="accent">Just Making Money</span>
+      </h2>
+      <p class="section-copy">
+        I want to build a powerful brand around growth, self-belief, and high standards.
+        Trading is one piece of that. The bigger mission is showing people what’s possible
+        when you stop thinking small and start taking your future seriously.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>What I Stand For</h3>
+          <ul>
+            <li>Confidence built from real work</li>
+            <li>Discipline over emotion</li>
+            <li>High standards in everything</li>
+            <li>Learning how to think independently</li>
+            <li>Building freedom at a young age</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>What I’m Building</h3>
+          <p>
+            I’m building more than a page. I’m building a presence.
+            A brand where people come for trading, but stay for the mindset,
+            energy, and standards behind it. Something premium. Something sharp.
+            Something that actually means something.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="why">
+      <h2 class="section-title">
+        Why Follow <span class="accent">Zaso</span>?
+      </h2>
+      <p class="section-copy">
+        Because I’m not trying to look the part — I’m living it.
+        I’m young, hungry, and building in real time. The goal is not fake motivation.
+        The goal is results, growth, and showing what happens when you go all in on yourself.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>My Edge</h3>
+          <ul>
+            <li>Young perspective with real ambition</li>
+            <li>Built confidence through live experience</li>
+            <li>Focused on execution, not just hype</li>
+            <li>Driven by freedom, not comfort</li>
+            <li>Serious about building something long term</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>The Vision</h3>
+          <p>
+            I want people to land on this page and instantly feel the energy.
+            Not just “this guy trades,” but “this guy is building a movement.”
+            A premium identity. A strong message. A future that feels bigger
+            than where most people stop.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="quote-section" id="connect">
+      <div class="quote-box">
+        <h2>
+          “I’m Not Here To Be Normal.
+          <span class="accent">I’m Here To Build Something Big.</span>”
+        </h2>
+        <p>
+          My name is Zaso. I’ve made over $300,000 trading by 18 years old,
+          and I’m just getting started. This is about more than charts.
+          It’s about building a powerful future, creating freedom, and proving
+          what can happen when you bet on yourself and refuse to play small.
+        </p>
+
+        <div style="margin-top: 28px;">
+          <a href="#" class="btn btn-primary">Let’s Build →</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      © 2026 Zaso / Eliano Trading. All rights reserved.
+    </footer>
+  </div>
+</body>
+</html>
