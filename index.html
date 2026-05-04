@@ -112,6 +112,24 @@
       white-space: nowrap;
     }
 
+    .stock-banner-wrap {
+      width: min(1180px, calc(100% - 32px));
+      margin: 18px auto 0;
+      position: relative;
+      z-index: 2;
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(10,10,10,0.92);
+      border: 1px solid rgba(242, 177, 100, 0.22);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.30), 0 0 26px rgba(242, 177, 100, 0.08);
+    }
+
+    .stock-banner-wrap .tradingview-widget-container {
+      height: 46px;
+      min-height: 46px;
+      background: transparent;
+    }
+
     .hero {
       text-align: center;
       padding: 72px 0 42px;
@@ -348,6 +366,12 @@
         font-size: 13px;
       }
 
+      .stock-banner-wrap {
+        width: calc(100% - 20px);
+        margin-top: 14px;
+        border-radius: 18px;
+      }
+
       .video-shell,
       .card,
       .cta-box {
@@ -372,6 +396,48 @@
 
       <a class="nav-btn" href="#join">Transform My Trading →</a>
     </nav>
+  </div>
+
+  <div class="stock-banner-wrap">
+    <div class="tradingview-widget-container" style="width: 100%; height: 44px;">
+      <iframe scrolling="no" allowtransparency="true" frameborder="0" src="https://www.tradingview-widget.com/embed-widget/ticker-tape/?locale=en#%7B%22symbols%22%3A%5B%7B%22proName%22%3A%22NASDAQ%3AAAPL%22%2C%22description%22%3A%22Apple%22%7D%2C%7B%22proName%22%3A%22NASDAQ%3ATSLA%22%2C%22description%22%3A%22Tesla%22%7D%2C%7B%22proName%22%3A%22NASDAQ%3ANVDA%22%2C%22description%22%3A%22Nvidia%22%7D%2C%7B%22proName%22%3A%22NASDAQ%3AMSFT%22%2C%22description%22%3A%22Microsoft%22%7D%2C%7B%22proName%22%3A%22NASDAQ%3AMETA%22%2C%22description%22%3A%22Meta%22%7D%2C%7B%22proName%22%3A%22NASDAQ%3AAMZN%22%2C%22description%22%3A%22Amazon%22%7D%2C%7B%22proName%22%3A%22NASDAQ%3AGOOGL%22%2C%22description%22%3A%22Google%22%7D%2C%7B%22proName%22%3A%22SP%3ASPX%22%2C%22description%22%3A%22S%26P%20500%22%7D%2C%7B%22proName%22%3A%22NASDAQ%3ANDX%22%2C%22description%22%3A%22Nasdaq%20100%22%7D%2C%7B%22proName%22%3A%22COINBASE%3ABTCUSD%22%2C%22description%22%3A%22Bitcoin%22%7D%5D%2C%22showSymbolLogo%22%3Atrue%2C%22isTransparent%22%3Atrue%2C%22displayMode%22%3A%22adaptive%22%2C%22colorTheme%22%3A%22dark%22%2C%22width%22%3A%22100%25%22%2C%22height%22%3A44%2C%22utm_source%22%3A%22%22%2C%22utm_medium%22%3A%22widget%22%2C%22utm_campaign%22%3A%22ticker-tape%22%2C%22page-uri%22%3A%22__NHTTP__%22%7D" title="ticker tape TradingView widget" lang="en" style="user-select: none; box-sizing: border-box; display: block; height: 44px; width: 100%;"></iframe>
+      
+    <style>
+	.tradingview-widget-copyright {
+		font-size: 13px !important;
+		line-height: 32px !important;
+		text-align: center !important;
+		vertical-align: middle !important;
+		/* @mixin sf-pro-display-font; */
+		font-family: -apple-system, BlinkMacSystemFont, 'Trebuchet MS', Roboto, Ubuntu, sans-serif !important;
+		color: #B2B5BE !important;
+	}
+
+	.tradingview-widget-copyright .blue-text {
+		color: #2962FF !important;
+	}
+
+	.tradingview-widget-copyright a {
+		text-decoration: none !important;
+		color: #B2B5BE !important;
+	}
+
+	.tradingview-widget-copyright a:visited {
+		color: #B2B5BE !important;
+	}
+
+	.tradingview-widget-copyright a:hover .blue-text {
+		color: #1E53E5 !important;
+	}
+
+	.tradingview-widget-copyright a:active .blue-text {
+		color: #1848CC !important;
+	}
+
+	.tradingview-widget-copyright a:visited .blue-text {
+		color: #2962FF !important;
+	}
+	</style></div>
   </div>
 
   <main>
@@ -495,5 +561,6 @@
   <footer class="footer">
     © 2026 Eliano Trading. All rights reserved.
   </footer>
+
 
 </body></html>
