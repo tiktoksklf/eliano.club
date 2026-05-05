@@ -1,566 +1,198 @@
 <html lang="en"><head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eliano Trading</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at top, rgba(255, 136, 60, 0.22), transparent 28%),
-        radial-gradient(circle at top right, rgba(120, 20, 20, 0.25), transparent 24%),
-        #040404;
-      color: #fff;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background-image: radial-gradient(rgba(255,255,255,0.14) 1px, transparent 1px);
-      background-size: 160px 160px;
-      opacity: 0.18;
-    }
-
-    .container {
-      width: min(1180px, calc(100% - 32px));
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-
-    .nav-wrap {
-      display: flex;
-      justify-content: center;
-      padding-top: 16px;
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      gap: 26px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: rgba(10, 10, 10, 0.96);
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.35);
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      white-space: nowrap;
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    .brand-icon {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #ffca7a, #c8612c 60%, #5b1717);
-      box-shadow: 0 0 18px rgba(255, 166, 74, 0.28);
-    }
-
-    .brand span {
-      color: #fff;
-    }
-
-    .brand span em {
-      font-style: normal;
-      color: #f3b165;
-    }
-
-    .nav-links {
-      list-style: none;
-      display: flex;
-      gap: 22px;
-      align-items: center;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: rgba(255,255,255,0.9);
-      font-size: 14px;
-    }
-
-    .nav-links a:hover {
-      color: #fff;
-    }
-
-    .nav-btn {
-      text-decoration: none;
-      color: #111;
-      background: #fff;
-      padding: 13px 22px;
-      border-radius: 999px;
-      font-size: 14px;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .stock-banner-wrap {
-      width: min(1180px, calc(100% - 32px));
-      margin: 18px auto 0;
-      position: relative;
-      z-index: 2;
-      border-radius: 999px;
-      overflow: hidden;
-      background: rgba(10,10,10,0.92);
-      border: 1px solid rgba(242, 177, 100, 0.22);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.30), 0 0 26px rgba(242, 177, 100, 0.08);
-    }
-
-    .stock-banner-wrap .tradingview-widget-container {
-      height: 46px;
-      min-height: 46px;
-      background: transparent;
-    }
-
-    .hero {
-      text-align: center;
-      padding: 72px 0 42px;
-    }
-
-    .eyebrow {
-      font-size: 13px;
-      color: rgba(255,255,255,0.72);
-      margin-bottom: 24px;
-    }
-
-    h1 {
-      max-width: 920px;
-      margin: 0 auto;
-      font-size: clamp(42px, 6vw, 78px);
-      line-height: 1.06;
-      letter-spacing: -0.045em;
-      font-weight: 700;
-    }
-
-    .accent {
-      color: #f2b164;
-    }
-
-    .subtext {
-      max-width: 860px;
-      margin: 28px auto 0;
-      color: rgba(255,255,255,0.9);
-      font-size: clamp(17px, 2vw, 28px);
-      line-height: 1.5;
-    }
-
-    .video-shell {
-      width: min(860px, 100%);
-      margin: 42px auto 0;
-      padding: 18px;
-      border-radius: 28px;
-      background: linear-gradient(180deg, rgba(26,26,26,0.96), rgba(10,10,10,0.96));
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 24px 80px rgba(0,0,0,0.58), 0 0 36px rgba(81, 69, 170, 0.12);
-    }
-
-    .video {
-      position: relative;
-      aspect-ratio: 16 / 9;
-      border-radius: 22px;
-      overflow: hidden;
-      background:
-        linear-gradient(rgba(0,0,0,0.18), rgba(0,0,0,0.28)),
-        url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&q=80") center/cover no-repeat;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      padding: 24px;
-    }
-
-    .video-caption {
-      background: rgba(0,0,0,0.58);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 14px;
-      padding: 12px 18px;
-      font-size: 16px;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-    }
-
-    .hero-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 26px;
-      text-decoration: none;
-      color: #fff;
-      font-weight: 700;
-      padding: 18px 28px;
-      border-radius: 18px;
-      background: linear-gradient(180deg, #1b1b1b, #0d0d0d);
-      border: 1px solid rgba(242, 177, 100, 0.35);
-      box-shadow: 0 0 24px rgba(242, 177, 100, 0.18);
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-top: 28px;
-    }
-
-    .stat {
-      padding: 16px 18px;
-      border-radius: 18px;
-      background: rgba(10,10,10,0.88);
-      border: 1px solid rgba(255,255,255,0.08);
-      color: rgba(255,255,255,0.86);
-      font-size: 14px;
-    }
-
-    .section {
-      padding: 92px 0 10px;
-    }
-
-    .section-title {
-      max-width: 820px;
-      margin: 0 auto 18px;
-      text-align: center;
-      font-size: clamp(30px, 4vw, 54px);
-      line-height: 1.12;
-      letter-spacing: -0.035em;
-    }
-
-    .section-copy {
-      max-width: 760px;
-      margin: 0 auto;
-      text-align: center;
-      color: rgba(255,255,255,0.72);
-      font-size: 18px;
-      line-height: 1.7;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 22px;
-      margin-top: 42px;
-    }
-
-    .card {
-      padding: 28px;
-      border-radius: 24px;
-      background: linear-gradient(180deg, rgba(18,18,18,0.95), rgba(8,8,8,0.96));
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 14px 45px rgba(0,0,0,0.34);
-    }
-
-    .card h3 {
-      font-size: 24px;
-      margin-bottom: 12px;
-      letter-spacing: -0.02em;
-    }
-
-    .card p,
-    .card li {
-      color: rgba(255,255,255,0.78);
-      font-size: 16px;
-      line-height: 1.7;
-    }
-
-    .card ul {
-      padding-left: 20px;
-      display: grid;
-      gap: 10px;
-    }
-
-    .testimonials {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-      margin-top: 42px;
-    }
-
-    .quote {
-      font-size: 18px;
-      line-height: 1.7;
-      color: rgba(255,255,255,0.88);
-      margin-bottom: 18px;
-    }
-
-    .person {
-      color: rgba(255,255,255,0.6);
-      font-size: 14px;
-      letter-spacing: 0.02em;
-    }
-
-    .cta-area {
-      padding: 110px 0 100px;
-      text-align: center;
-    }
-
-    .cta-box {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 56px 28px;
-      border-radius: 32px;
-      background:
-        radial-gradient(circle at top, rgba(242,177,100,0.16), transparent 40%),
-        linear-gradient(180deg, rgba(18,18,18,0.98), rgba(8,8,8,0.98));
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 28px 90px rgba(0,0,0,0.48);
-    }
-
-    .cta-box p {
-      max-width: 700px;
-      margin: 18px auto 0;
-      color: rgba(255,255,255,0.76);
-      font-size: 18px;
-      line-height: 1.7;
-    }
-
-    .footer {
-      text-align: center;
-      color: rgba(255,255,255,0.45);
-      font-size: 14px;
-      padding: 24px 0 42px;
-    }
-
-    @media (max-width: 980px) {
-      .nav {
-        width: calc(100% - 12px);
-        justify-content: space-between;
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      .stats,
-      .grid,
-      .testimonials {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .hero {
-        padding-top: 46px;
-      }
-
-      .nav-btn {
-        padding: 11px 16px;
-        font-size: 13px;
-      }
-
-      .brand {
-        font-size: 13px;
-      }
-
-      .stock-banner-wrap {
-        width: calc(100% - 20px);
-        margin-top: 14px;
-        border-radius: 18px;
-      }
-
-      .video-shell,
-      .card,
-      .cta-box {
-        border-radius: 22px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eliano Trading Group | Wall Street Market Desk</title>
+<meta name="description" content="A Wall Street-style market dashboard for Eliano Trading Group with watchlists, market pulse, recommendations, and live quote refresh.">
+<style>
+:root{
+  --bg:#050505;--bg2:#090806;--panel:#0e0d0a;--panel2:#15130e;--panel3:#1e1a12;
+  --line:rgba(218,185,94,.18);--line2:rgba(255,255,255,.075);--text:#f5f0e6;--muted:#9a927f;--soft:#cfc5ad;
+  --gold:#d7b15a;--gold2:#f4d98b;--green:#25d695;--red:#ff4c5f;--blue:#7db7ff;
+  --shadow:0 40px 100px rgba(0,0,0,.55);--radius:22px
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 12% 0%,rgba(215,177,90,.18),transparent 31%),linear-gradient(180deg,#020202 0%,#080704 40%,#020202 100%);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial,sans-serif;overflow-x:hidden}a{color:inherit;text-decoration:none}button,input{font:inherit}.grain{position:fixed;inset:0;pointer-events:none;opacity:.18;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,#000,transparent 92%)}
+.topbar{position:sticky;top:0;z-index:40;height:74px;padding:0 34px;display:flex;align-items:center;gap:24px;background:rgba(3,3,3,.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:13px;min-width:285px}.crest{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;color:#0c0903;font-weight:1000;letter-spacing:-.08em;background:linear-gradient(135deg,var(--gold2),var(--gold) 48%,#80621d);box-shadow:0 0 0 1px rgba(255,255,255,.15),0 12px 40px rgba(215,177,90,.22)}.brand small{display:block;color:var(--muted);font-size:11px;letter-spacing:.19em;text-transform:uppercase}.brand strong{display:block;font-family:Georgia,serif;font-size:21px;letter-spacing:.02em}.search{height:42px;width:min(390px,35vw);border:1px solid var(--line);background:#0b0a08;border-radius:999px;color:var(--text);outline:none;padding:0 18px}.nav{margin-left:auto;display:flex;gap:24px;color:#d8cfba;font-size:13px;font-weight:700}.nav a:hover{color:var(--gold2)}.cta{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#100c04;border-radius:999px;padding:12px 18px;font-weight:950;box-shadow:0 14px 40px rgba(215,177,90,.22)}
+.tape{height:38px;overflow:hidden;border-bottom:1px solid var(--line);background:#090805;white-space:nowrap}.tape-track{display:inline-flex;gap:32px;align-items:center;height:38px;animation:tape 34s linear infinite;color:#d8cfba;font-size:13px}.tape b{margin-left:7px}@keyframes tape{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 365px;min-height:calc(100vh - 112px)}main{padding:48px 42px 90px}aside{position:sticky;top:74px;height:calc(100vh - 74px);overflow:auto;border-left:1px solid var(--line);background:rgba(8,7,5,.88);padding:18px 16px 36px}.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:32px;align-items:center;padding:38px 0 40px}.eyebrow{color:var(--gold2);font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:900}.hero h1{font-family:Georgia,serif;font-size:clamp(48px,6vw,92px);line-height:.9;margin:14px 0 18px;letter-spacing:-.055em}.hero p{max-width:760px;color:var(--soft);font-size:18px;line-height:1.65;margin:0}.actions{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}.btn{border:1px solid var(--line);background:#11100c;color:var(--text);border-radius:999px;padding:13px 19px;font-weight:900;cursor:pointer}.btn.primary{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#0e0a03}.terminal{border:1px solid var(--line);background:linear-gradient(180deg,rgba(215,177,90,.09),rgba(255,255,255,.015));border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}.terminal-head{height:48px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 16px;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.18em}.lights{display:flex;gap:7px}.lights i{width:10px;height:10px;border-radius:50%;background:var(--gold)}.terminal-body{padding:18px}.quote-big{display:flex;justify-content:space-between;gap:18px;align-items:end;border-bottom:1px solid var(--line2);padding-bottom:18px;margin-bottom:18px}.quote-big h2{margin:0;font-family:Georgia,serif;font-size:44px}.quote-big span{font-size:13px;color:var(--muted)}.metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.metric{background:rgba(255,255,255,.035);border:1px solid var(--line2);border-radius:16px;padding:14px}.metric small{color:var(--muted)}.metric strong{display:block;margin-top:7px;font-size:22px}.section-title{display:flex;align-items:end;justify-content:space-between;gap:18px;margin:32px 0 18px}.section-title h2{margin:0;font-family:Georgia,serif;font-size:34px;letter-spacing:-.03em}.section-title span{color:var(--muted);font-size:13px}.market-tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.tab{border:1px solid var(--line);background:linear-gradient(180deg,#15130e,#0c0b08);border-radius:18px;padding:15px;cursor:pointer;color:var(--text);text-align:left}.tab.active{box-shadow:inset 0 0 0 1px var(--gold);background:linear-gradient(180deg,rgba(215,177,90,.16),#0c0b08)}.tab-top{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;text-transform:uppercase}.tab strong{display:block;font-size:22px;margin-top:8px}.change{font-weight:950}.pos{color:var(--green)}.neg{color:var(--red)}.chart-panel{margin-top:16px;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.01));box-shadow:var(--shadow);padding:22px}.chart-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:14px}.chart-head h3{margin:0;font-size:24px;font-family:Georgia,serif}.pills{display:flex;gap:8px;flex-wrap:wrap}.pill{border:1px solid var(--line);background:#0c0b08;color:#d6ccb5;border-radius:999px;padding:8px 12px;font-size:12px;font-weight:900}.pill.active{background:var(--gold);color:#0b0802}.chartbox{height:365px;position:relative}.chartbox svg{width:100%;height:100%;display:block}.axis{position:absolute;right:0;top:18px;bottom:24px;display:flex;flex-direction:column;justify-content:space-between;color:var(--muted);font-size:11px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{border:1px solid var(--line);background:linear-gradient(180deg,#12100c,#090806);border-radius:20px;padding:20px;box-shadow:0 18px 60px rgba(0,0,0,.22)}.card h3{font-family:Georgia,serif;margin:0 0 9px;font-size:22px}.card p{color:var(--soft);line-height:1.55;margin:0}.recommend-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.rec{position:relative;overflow:hidden}.rec:before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--gold),transparent)}.ticker-row{display:flex;justify-content:space-between;gap:12px}.ticker{font-size:28px;font-weight:1000}.rating{align-self:flex-start;border:1px solid rgba(37,214,149,.35);background:rgba(37,214,149,.1);color:var(--green);border-radius:999px;padding:6px 9px;font-size:11px;font-weight:950}.risk{margin-top:14px;color:var(--muted);font-size:12px}.desk{display:grid;grid-template-columns:1.25fr .75fr;gap:16px}.news-list{display:grid;gap:10px}.news{display:block;border:1px solid var(--line2);background:rgba(255,255,255,.03);border-radius:15px;padding:14px}.news small{color:var(--gold2)}.news h4{margin:6px 0 0;font-size:15px;line-height:1.4}.watch-title{display:flex;justify-content:space-between;align-items:center;margin:8px 0 12px}.watch-title h3{font-family:Georgia,serif;margin:0;font-size:23px}.watch-section{margin-bottom:16px}.watch-section h4{color:var(--gold2);font-size:11px;text-transform:uppercase;letter-spacing:.18em;margin:14px 0 7px}.watch-row{display:grid;grid-template-columns:76px 1fr 80px 62px;gap:8px;align-items:center;padding:10px 9px;border-radius:12px;color:#d9d0bb;font-size:12px;cursor:pointer}.watch-row:hover{background:rgba(215,177,90,.08)}.sym{font-weight:950;color:#fff}.side-card{border:1px solid var(--line);background:#0d0b08;border-radius:18px;padding:16px;margin-top:14px}.side-card h3{font-family:Georgia,serif;margin:0 0 8px}.side-card p{margin:0;color:var(--soft);line-height:1.5;font-size:13px}.bar{height:9px;background:#1a1710;border-radius:999px;overflow:hidden;margin-top:12px}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--green));border-radius:999px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.form-grid .full{grid-column:1/-1}.field{display:grid;gap:7px}.field label{font-size:11px;color:var(--gold2);text-transform:uppercase;letter-spacing:.14em;font-weight:900}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);background:#090806;color:var(--text);border-radius:14px;padding:12px;outline:none}.field textarea{min-height:105px;resize:vertical}.notice{display:none;margin-top:12px;border:1px solid rgba(37,214,149,.32);background:rgba(37,214,149,.08);color:#bfffe6;border-radius:14px;padding:12px;font-size:13px}.notice.show{display:block}.modal{position:fixed;inset:0;display:none;place-items:center;background:rgba(0,0,0,.72);z-index:99;padding:20px}.modal.show{display:grid}.modal-card{width:min(620px,100%);border:1px solid var(--line);background:linear-gradient(180deg,#15120b,#070604);border-radius:24px;box-shadow:0 40px 140px rgba(0,0,0,.75);padding:22px}.modal-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}.modal-head h2{font-family:Georgia,serif;margin:0;font-size:32px}.close{border:1px solid var(--line);background:#0d0b08;color:var(--text);border-radius:999px;width:38px;height:38px;cursor:pointer}.mini-tools{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.tool-card{border:1px solid var(--line2);background:rgba(255,255,255,.025);border-radius:16px;padding:14px}.tool-card strong{display:block;margin-bottom:6px}.tool-card button{margin-top:10px}.quote-result{margin-top:10px;color:var(--soft);font-size:13px;line-height:1.5}.callbox{border:1px solid var(--line);background:linear-gradient(135deg,rgba(215,177,90,.13),rgba(255,255,255,.02));border-radius:20px;padding:19px;margin-top:14px}.callbox h3{font-family:Georgia,serif;margin:0 0 8px;font-size:24px}.callbox p{color:var(--soft);margin:0 0 14px;line-height:1.5}.phone-number{font-size:26px;font-weight:1000;color:var(--gold2);letter-spacing:.03em}
+.footer{color:var(--muted);border-top:1px solid var(--line);padding-top:24px;margin-top:46px;font-size:12px;line-height:1.6}.status{color:var(--muted);font-size:12px}
+@media(max-width:1180px){.layout{grid-template-columns:1fr}aside{position:relative;top:0;height:auto;border-left:0;border-top:1px solid var(--line)}.hero{grid-template-columns:1fr}.market-tabs{grid-template-columns:repeat(2,1fr)}.recommend-grid,.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:720px){.topbar{height:auto;flex-wrap:wrap;padding:14px 18px}.brand{min-width:0}.search{width:100%;order:3}.nav{display:none}main{padding:28px 16px}.hero h1{font-size:48px}.market-tabs,.recommend-grid,.grid,.desk{grid-template-columns:1fr}.chartbox{height:300px}.layout{min-height:auto}}
+</style>
 </head>
 <body>
-  <div class="nav-wrap">
-    <nav class="nav">
-      <div class="brand">
-        <div class="brand-icon"></div>
-        <span><em>Eliano</em> Trading</span>
+<div class="grain"></div>
+<header class="topbar">
+  <a class="brand" href="#"><div style="
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  background-image:url('https://i.imgur.com/QOd2iBL.png');
+  background-size:cover;
+  background-position:center;
+"></div><div><small>Private Market Desk</small><strong>Eliano Trading Group</strong></div></a>
+  
+  <nav class="nav"><a href="#markets">Markets</a><a href="#recommend">Recommendations</a><a href="#desk">Research Desk</a><a href="https://discord.gg/ztGa6br7RV">Join</a><a href="#contact">Call</a></nav>
+  <a href="https://discord.gg/ztGa6br7RV" target="_blank">
+  <button class="cta">Join the Group</button>
+</a>
+</header>
+<div class="tape"><div class="tape-track" id="tape"><span>SPX 7,200.75 <b class="neg">-0.41%</b></span><span>NDQ 25,067.8 <b class="neg">-0.19%</b></span><span>DJI 48,941.9 <b class="neg">-1.13%</b></span><span>AAPL 276.83 <b class="neg">-1.18%</b></span><span>TSLA 392.51 <b class="pos">+0.43%</b></span><span>NVDA 184.20 <b class="pos">+1.12%</b></span><span>MSFT 521.44 <b class="pos">+0.28%</b></span><span>BTC 80,540.12 <b class="pos">+0.88%</b></span><span>GOLD 4,544.71 <b class="pos">+0.45%</b></span><span>OIL 104.20 <b class="neg">-0.88%</b></span><span>DXY 98.47 <b class="neg">-0.01%</b></span><span>SPX 7,200.75 <b class="neg">-0.41%</b></span><span>NDQ 25,067.8 <b class="neg">-0.19%</b></span><span>DJI 48,941.9 <b class="neg">-1.13%</b></span><span>AAPL 276.83 <b class="neg">-1.18%</b></span><span>TSLA 392.51 <b class="pos">+0.43%</b></span><span>NVDA 184.20 <b class="pos">+1.12%</b></span><span>MSFT 521.44 <b class="pos">+0.28%</b></span><span>BTC 80,540.12 <b class="pos">+0.88%</b></span><span>GOLD 4,544.71 <b class="pos">+0.45%</b></span><span>OIL 104.20 <b class="neg">-0.88%</b></span><span>DXY 98.47 <b class="neg">-0.01%</b></span></div></div>
+<div class="layout">
+<main>
+  <section class="hero">
+    <div>
+      <div class="eyebrow">Wall Street style market intelligence</div>
+      <h1>Markets, strategy, and clean execution.</h1>
+      <p>Eliano Trading Group tracks major indexes, mega-cap technology, commodities, crypto, and market sentiment in one premium trading-room dashboard.</p>
+      <div class="actions"><a class="btn primary" href="#markets">View Markets</a><button class="btn" onclick="openJoin()">Join the Group</button><a class="btn" href="tel:+13525550138">Call for Free Stock Questions</a></div>
+    </div>
+    <div class="terminal">
+      <div class="terminal-head"><span>ELIANO TERMINAL</span><div class="lights"><i></i><i></i><i></i></div></div>
+      <div class="terminal-body">
+        <div class="quote-big"><div><span>Primary index</span><h2 id="heroSymbol">SPX</h2></div><div><span>Last</span><h2 id="heroPrice">7,200.75</h2></div></div>
+        <div class="metric-grid"><div class="metric"><small>Market Bias</small><strong id="bias">Cautious</strong></div><div class="metric"><small>Risk Appetite</small><strong id="risk">53/100</strong></div><div class="metric"><small>Tech Pulse</small><strong id="tech">52/100</strong></div></div>
       </div>
+    </div>
+  </section>
 
-      <ul class="nav-links">
-        <li><a href="prices.html">Prices</a></li>
-        <li><a href="https://discord.gg/WmjBzBcgqJ">Discord</a></li>
-        <li><a href="#about">About Us</a></li>
-      </ul>
+  <section id="markets">
+    <div class="section-title"><h2>Market command center</h2><span class="status" id="status">Fast mode active. Live API was slow or blocked, so fallback data stayed loaded.</span></div>
+    <div class="market-tabs" id="tabs"><button class="tab active" onclick="selectAsset('^GSPC')"><div class="tab-top"><span>SPX</span><span class="neg">-0.41%</span></div><strong>7,200.75</strong><div class="status">S&amp;P 500</div></button><button class="tab " onclick="selectAsset('^IXIC')"><div class="tab-top"><span>NDQ</span><span class="neg">-0.19%</span></div><strong>25,067.8</strong><div class="status">Nasdaq Composite</div></button><button class="tab " onclick="selectAsset('^DJI')"><div class="tab-top"><span>DJI</span><span class="neg">-1.13%</span></div><strong>48,941.9</strong><div class="status">Dow Jones</div></button><button class="tab " onclick="selectAsset('AAPL')"><div class="tab-top"><span>AAPL</span><span class="neg">-1.18%</span></div><strong>276.83</strong><div class="status">Apple Inc.</div></button><button class="tab " onclick="selectAsset('TSLA')"><div class="tab-top"><span>TSLA</span><span class="pos">+0.43%</span></div><strong>392.51</strong><div class="status">Tesla Inc.</div></button></div>
+    <div class="chart-panel">
+      <div class="chart-head"><div><h3 id="chartTitle">S&amp;P 500</h3><div class="status" id="selectedInfo">SPX is at <b>7,200.75</b>, moving <b class="neg">-0.41%</b> today.</div></div><div class="pills"><button class="pill active"></button><button class="pill"></button><button class="pill"></button><button class="pill">YTD</button></div></div>
+      <div class="chartbox"><svg id="chart" viewBox="0 0 1000 360" preserveAspectRatio="none"><defs><linearGradient id="fill" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#ff4c5f" stop-opacity=".25"></stop><stop offset="100%" stop-color="#ff4c5f" stop-opacity="0"></stop></linearGradient></defs><g stroke="rgba(255,255,255,.07)" stroke-width="1"><line x1="0" y1="60" x2="1000" y2="60"></line><line x1="0" y1="130" x2="1000" y2="130"></line><line x1="0" y1="200" x2="1000" y2="200"></line><line x1="0" y1="270" x2="1000" y2="270"></line><line x1="0" y1="340" x2="1000" y2="340"></line></g><polyline points="0,340 0,151.27624122609313 12.82051282051282,146.62381672998904 25.64102564102564,142.39579979393395 38.46153846153847,117.72969122287333 51.28205128205128,114.0178456436345 64.1025641025641,98.88828965161954 76.92307692307693,124.30686135617233 89.74358974358974,134.50181917702363 102.56410256410255,90.19825809775261 115.38461538461539,73.56606993367251 128.2051282051282,75.20864189580786 141.02564102564102,84.65343067808615 153.84615384615387,61.6780700624638 166.66666666666666,50.91876489149331 179.48717948717947,46.12640060531908 192.30769230769232,54.960960139094595 205.1282051282051,45 217.94871794871796,96.02296509755939 230.76923076923077,91.46689258806103 243.5897435897436,98.42029428810613 256.4102564102564,128.91110985897353 269.2307692307692,198.96359231115977 282.05128205128204,250.87896033228154 294.87179487179486,216.01789394036962 307.69230769230774,229.73658155708677 320.51282051282055,241.48234754330608 333.3333333333333,220.43402665979778 346.15384615384613,249.6103258419731 358.97435897435895,233.87054060145533 371.7948717948718,253.13405563783886 384.61538461538464,269.57812801854595 397.4358974358974,327.50861291776675 410.2564102564102,330 423.0769230769231,275.3569531199691 435.8974358974359,260.55774679631656 448.71794871794873,282.92287816343617 461.53846153846155,258.8188228475755 474.35897435897436,289.73404597849185 487.1794871794872,283.9552208770687 500,288.3713535964969 512.8205128205128,300.8214067229055 525.6410256410256,302.09004121321396 538.4615384615385,277.14405306201303 551.2820512820513,262.62472631850085 564.1025641025641,259.7594017644407 576.9230769230769,221.0442559083006 589.7435897435897,212.35422435443365 602.5641025641025,210.80341618906562 615.3846153846155,228.89235462682723 628.2051282051282,232.17979264601712 641.0256410256411,224.3339880224097 653.8461538461538,220.62214244317084 666.6666666666666,216.81623897224546 679.4871794871796,219.21356816279217 692.3076923076923,192.43230407624444 705.1282051282052,202.39326421533903 717.9487179487179,213.76279863481227 730.7692307692307,223.487466997231 743.5897435897436,247.1671147530427 756.4102564102564,244.9601954407882 769.2307692307693,251.95947903921694 782.0512820512821,258.44259128082945 794.8717948717948,278.6925671324618 807.6923076923077,260.0415754395003 820.5128205128204,276.67376360358037 833.3333333333334,256.8940772103806 846.1538461538462,261.9663210766952 858.9743589743589,235.89163822525597 871.7948717948718,231.75767918088735 884.6153846153845,235.28140897675317 897.4358974358975,240.16783115461396 910.2564102564103,246.08659604610727 923.0769230769231,235.18735108506667 935.8974358974359,235.79758033356944 948.7179487179487,243.31532938373368 961.5384615384615,228.98641251851376 974.3589743589744,258.0686538090025 987.1794871794872,240.9661761864898 1000,244.30179019898253 1000,340" fill="url(#fill)" stroke="none"></polyline><polyline points="0,151.27624122609313 12.82051282051282,146.62381672998904 25.64102564102564,142.39579979393395 38.46153846153847,117.72969122287333 51.28205128205128,114.0178456436345 64.1025641025641,98.88828965161954 76.92307692307693,124.30686135617233 89.74358974358974,134.50181917702363 102.56410256410255,90.19825809775261 115.38461538461539,73.56606993367251 128.2051282051282,75.20864189580786 141.02564102564102,84.65343067808615 153.84615384615387,61.6780700624638 166.66666666666666,50.91876489149331 179.48717948717947,46.12640060531908 192.30769230769232,54.960960139094595 205.1282051282051,45 217.94871794871796,96.02296509755939 230.76923076923077,91.46689258806103 243.5897435897436,98.42029428810613 256.4102564102564,128.91110985897353 269.2307692307692,198.96359231115977 282.05128205128204,250.87896033228154 294.87179487179486,216.01789394036962 307.69230769230774,229.73658155708677 320.51282051282055,241.48234754330608 333.3333333333333,220.43402665979778 346.15384615384613,249.6103258419731 358.97435897435895,233.87054060145533 371.7948717948718,253.13405563783886 384.61538461538464,269.57812801854595 397.4358974358974,327.50861291776675 410.2564102564102,330 423.0769230769231,275.3569531199691 435.8974358974359,260.55774679631656 448.71794871794873,282.92287816343617 461.53846153846155,258.8188228475755 474.35897435897436,289.73404597849185 487.1794871794872,283.9552208770687 500,288.3713535964969 512.8205128205128,300.8214067229055 525.6410256410256,302.09004121321396 538.4615384615385,277.14405306201303 551.2820512820513,262.62472631850085 564.1025641025641,259.7594017644407 576.9230769230769,221.0442559083006 589.7435897435897,212.35422435443365 602.5641025641025,210.80341618906562 615.3846153846155,228.89235462682723 628.2051282051282,232.17979264601712 641.0256410256411,224.3339880224097 653.8461538461538,220.62214244317084 666.6666666666666,216.81623897224546 679.4871794871796,219.21356816279217 692.3076923076923,192.43230407624444 705.1282051282052,202.39326421533903 717.9487179487179,213.76279863481227 730.7692307692307,223.487466997231 743.5897435897436,247.1671147530427 756.4102564102564,244.9601954407882 769.2307692307693,251.95947903921694 782.0512820512821,258.44259128082945 794.8717948717948,278.6925671324618 807.6923076923077,260.0415754395003 820.5128205128204,276.67376360358037 833.3333333333334,256.8940772103806 846.1538461538462,261.9663210766952 858.9743589743589,235.89163822525597 871.7948717948718,231.75767918088735 884.6153846153845,235.28140897675317 897.4358974358975,240.16783115461396 910.2564102564103,246.08659604610727 923.0769230769231,235.18735108506667 935.8974358974359,235.79758033356944 948.7179487179487,243.31532938373368 961.5384615384615,228.98641251851376 974.3589743589744,258.0686538090025 987.1794871794872,240.9661761864898 1000,244.30179019898253" fill="none" stroke="#ff4c5f" stroke-width="3" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"></polyline></svg><div class="axis"><span>High</span><span>Mid</span><span>Low</span></div></div>
+    </div>
+  </section>
 
-      <a class="nav-btn" href="#join">Transform My Trading →</a>
-    </nav>
+  <section id="recommend">
+    <div class="section-title"><h2>What we recommend watching</h2><span>Research ideas only — not financial advice</span></div>
+    <div class="recommend-grid" id="recommendGrid"><article class="card rec"><div class="ticker-row"><div><div class="ticker">SPY</div><div class="status">S&amp;P 500 ETF</div></div><span class="rating">CORE WATCH</span></div><p>Broad market exposure. Best when the market is risk-on and indexes reclaim strength.</p><div class="risk">Risk: Medium</div></article><article class="card rec"><div class="ticker-row"><div><div class="ticker">QQQ</div><div class="status">Nasdaq 100 ETF</div></div><span class="rating">GROWTH</span></div><p>Tech-heavy momentum vehicle. Strong when AI and mega-cap earnings lead the market.</p><div class="risk">Risk: High</div></article><article class="card rec"><div class="ticker-row"><div><div class="ticker">AAPL</div><div class="status">Apple Inc.</div></div><span class="rating">QUALITY</span></div><p>Mega-cap brand with huge liquidity. Watch for clean breakouts after news or earnings digestion.</p><div class="risk">Risk: Medium</div></article><article class="card rec"><div class="ticker-row"><div><div class="ticker">NVDA</div><div class="status">NVIDIA Corp.</div></div><span class="rating">AI LEADER</span></div><p>AI theme leader with high volatility. Great for watchlist, but entries need tight risk planning.</p><div class="risk">Risk: High</div></article><article class="card rec"><div class="ticker-row"><div><div class="ticker">MSFT</div><div class="status">Microsoft</div></div><span class="rating">BLUE CHIP</span></div><p>Cloud and AI exposure with a cleaner large-cap profile than many hype names.</p><div class="risk">Risk: Medium</div></article><article class="card rec"><div class="ticker-row"><div><div class="ticker">BTC</div><div class="status">Bitcoin</div></div><span class="rating">RISK-ON</span></div><p>Useful for reading risk appetite. When crypto runs, speculative money is usually active.</p><div class="risk">Risk: Very High</div></article><article class="card rec"><div class="ticker-row"><div><div class="ticker">GOLD</div><div class="status">Gold Futures</div></div><span class="rating">HEDGE</span></div><p>Watch when markets get nervous, dollar weakens, or rate expectations shift.</p><div class="risk">Risk: Medium</div></article><article class="card rec"><div class="ticker-row"><div><div class="ticker">CASH</div><div class="status">Cash / No Trade</div></div><span class="rating">DEFENSE</span></div><p>Sometimes the best position is waiting. Protect capital when the chart is messy.</p><div class="risk">Risk: Low</div></article></div>
+  </section>
+
+  <section id="desk">
+    <div class="section-title"><h2>Research desk</h2></div>
+    <div class="desk">
+      <div class="card"><h3>Market notes</h3><div class="news-list" id="news"><div class="news"><small>Market structure</small><h4>Major indexes remain the first read: if SPX and Nasdaq are weak together, stay cautious on longs.</h4></div><div class="news"><small>Technology</small><h4>AI names can move the whole tape. Watch NVDA, MSFT, AAPL, and semiconductors for leadership.</h4></div><div class="news"><small>Macro</small><h4>Dollar, yields, gold, and oil can flip intraday sentiment fast. Avoid trading blind into big news.</h4></div><div class="news"><small>Execution</small><h4>Plan entries before the bell. Use stops, avoid revenge trades, and stop after your daily goal.</h4></div></div></div>
+      <div class="card"><h3>Trading rules</h3><p>Wait for confirmation, define risk before entry, avoid chasing candles, and verify every price with your broker before placing a trade.</p><br><p><b>Best use:</b> market prep, watchlist planning, and clean research presentation for Eliano Group.</p></div>
+    </div>
+  </section>
+
+
+  <section id="tools">
+    
+    
+  </section>
+
+  <section id="join">
+    <div class="section-title"><h2>Join Eliano Trading Group</h2></div>
+    <div class="card">
+      <form id="joinForm" onsubmit="submitJoin(event)">
+        
+        <div class="actions"><a href="https://discord.gg/ztGa6br7RV" target="_blank">
+  <button class="cta">Join the Group</button>
+</a></div>
+        <div class="notice" id="joinNotice"></div>
+      </form>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-title"><h2>Call us for free stock questions</h2></div>
+    <div class="callbox"><h3>Free stock questions line</h3><p>Have a question about a ticker, market direction, or a watchlist idea? Call Eliano Trading Group. This should be general education only, not personalized financial advice.</p><div class="phone-number">(904)990-6384</div><div class="actions"><a class="btn primary" href="tel:+9049906384">Call Now</a></div></div>
+  </section>
+
+  
+  <footer class="footer">Disclaimer: Eliano Trading Group is not a registered investment adviser. The recommendation section is a watchlist for research, not a promise of profit. Market data may be delayed, unavailable, or estimated by fallback data. Always verify quotes and risks with your broker before trading.</footer>
+</main>
+<aside>
+  <div class="watch-title"><h3>Watchlist</h3><span class="status" id="clock">11:08 PM</span></div>
+  <div id="watchlist"><div class="watch-section"><h4>INDICES</h4><div class="watch-row" onclick="selectAsset('^GSPC')"><div class="sym">SPX</div><div>S&amp;P 500</div><div>7,200.75</div><div class="neg">-0.41%</div></div><div class="watch-row" onclick="selectAsset('^IXIC')"><div class="sym">NDQ</div><div>Nasdaq Composite</div><div>25,067.8</div><div class="neg">-0.19%</div></div><div class="watch-row" onclick="selectAsset('^DJI')"><div class="sym">DJI</div><div>Dow Jones</div><div>48,941.9</div><div class="neg">-1.13%</div></div></div><div class="watch-section"><h4>STOCKS</h4><div class="watch-row" onclick="selectAsset('AAPL')"><div class="sym">AAPL</div><div>Apple Inc.</div><div>276.83</div><div class="neg">-1.18%</div></div><div class="watch-row" onclick="selectAsset('TSLA')"><div class="sym">TSLA</div><div>Tesla Inc.</div><div>392.51</div><div class="pos">+0.43%</div></div><div class="watch-row" onclick="selectAsset('NVDA')"><div class="sym">NVDA</div><div>NVIDIA Corp.</div><div>184.20</div><div class="pos">+1.12%</div></div><div class="watch-row" onclick="selectAsset('MSFT')"><div class="sym">MSFT</div><div>Microsoft</div><div>521.44</div><div class="pos">+0.28%</div></div></div><div class="watch-section"><h4>CRYPTO</h4><div class="watch-row" onclick="selectAsset('BTC-USD')"><div class="sym">BTC</div><div>Bitcoin</div><div>80,540.12</div><div class="pos">+0.88%</div></div></div><div class="watch-section"><h4>FUTURES</h4><div class="watch-row" onclick="selectAsset('GC=F')"><div class="sym">GOLD</div><div>Gold Futures</div><div>4,544.71</div><div class="pos">+0.45%</div></div><div class="watch-row" onclick="selectAsset('CL=F')"><div class="sym">OIL</div><div>WTI Crude Oil</div><div>104.20</div><div class="neg">-0.88%</div></div></div><div class="watch-section"><h4>FOREX</h4><div class="watch-row" onclick="selectAsset('DX-Y.NYB')"><div class="sym">DXY</div><div>US Dollar Index</div><div>98.47</div><div class="neg">-0.01%</div></div></div></div>
+  <div class="side-card"><h3>Market pulse</h3><p>Risk-on score blends index direction, tech strength, and crypto momentum.</p><div class="bar"><i id="pulseBar" style="width: 53%;"></i></div></div>
+  <div class="side-card"><h3>Join desk</h3><p>Use the Join button to save a local signup, or connect the form later to Formspree, Netlify Forms, or your own backend.</p><a href="https://discord.gg/ztGa6br7RV" target="_blank">
+  <button class="cta">Join the Group</button>
+</a></div>
+</aside>
+</div>
+<div class="modal" id="joinModal" onclick="modalBackdrop(event)">
+  <div class="modal-card">
+    <div class="modal-head"><h2>Join Eliano Trading Group</h2><button class="close" onclick="closeJoin()">×</button></div>
+    <p class="status">Fill this out and it saves the lead in your browser. For a real website, connect it to Formspree, Netlify Forms, Google Sheets, or your own server.</p>
+    <form onsubmit="submitJoin(event,true)">
+      <div class="form-grid">
+        <div class="field"><label>Name</label><input required="" id="modalName" placeholder="Your name"></div>
+        <div class="field"><label>Email</label><input required="" type="email" id="modalEmail" placeholder="you@email.com"></div>
+        <div class="field full"><label>What do you want help with?</label><textarea id="modalMessage" placeholder="Stocks, long-term investing, options, market news, etc."></textarea></div>
+      </div>
+      <div class="actions"><button class="btn primary" type="submit">Submit Join Request</button><a class="btn" href="tel:+13525550138">Call Instead</a></div>
+      <div class="notice" id="modalNotice"></div>
+    </form>
   </div>
+</div>
 
-  <div class="stock-banner-wrap">
-    <div class="tradingview-widget-container" style="width: 100%; height: 44px;">
-      <iframe scrolling="no" allowtransparency="true" frameborder="0" src="https://www.tradingview-widget.com/embed-widget/ticker-tape/?locale=en#%7B%22symbols%22%3A%5B%7B%22proName%22%3A%22NASDAQ%3AAAPL%22%2C%22description%22%3A%22Apple%22%7D%2C%7B%22proName%22%3A%22NASDAQ%3ATSLA%22%2C%22description%22%3A%22Tesla%22%7D%2C%7B%22proName%22%3A%22NASDAQ%3ANVDA%22%2C%22description%22%3A%22Nvidia%22%7D%2C%7B%22proName%22%3A%22NASDAQ%3AMSFT%22%2C%22description%22%3A%22Microsoft%22%7D%2C%7B%22proName%22%3A%22NASDAQ%3AMETA%22%2C%22description%22%3A%22Meta%22%7D%2C%7B%22proName%22%3A%22NASDAQ%3AAMZN%22%2C%22description%22%3A%22Amazon%22%7D%2C%7B%22proName%22%3A%22NASDAQ%3AGOOGL%22%2C%22description%22%3A%22Google%22%7D%2C%7B%22proName%22%3A%22SP%3ASPX%22%2C%22description%22%3A%22S%26P%20500%22%7D%2C%7B%22proName%22%3A%22NASDAQ%3ANDX%22%2C%22description%22%3A%22Nasdaq%20100%22%7D%2C%7B%22proName%22%3A%22COINBASE%3ABTCUSD%22%2C%22description%22%3A%22Bitcoin%22%7D%5D%2C%22showSymbolLogo%22%3Atrue%2C%22isTransparent%22%3Atrue%2C%22displayMode%22%3A%22adaptive%22%2C%22colorTheme%22%3A%22dark%22%2C%22width%22%3A%22100%25%22%2C%22height%22%3A44%2C%22utm_source%22%3A%22%22%2C%22utm_medium%22%3A%22widget%22%2C%22utm_campaign%22%3A%22ticker-tape%22%2C%22page-uri%22%3A%22__NHTTP__%22%7D" title="ticker tape TradingView widget" lang="en" style="user-select: none; box-sizing: border-box; display: block; height: 44px; width: 100%;"></iframe>
-      
-    <style>
-	.tradingview-widget-copyright {
-		font-size: 13px !important;
-		line-height: 32px !important;
-		text-align: center !important;
-		vertical-align: middle !important;
-		/* @mixin sf-pro-display-font; */
-		font-family: -apple-system, BlinkMacSystemFont, 'Trebuchet MS', Roboto, Ubuntu, sans-serif !important;
-		color: #B2B5BE !important;
-	}
+<script>
+const cors = url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+const assets = [
+  {symbol:'^GSPC', display:'SPX', name:'S&P 500', type:'INDICES', price:7200.76, change:-0.41},
+  {symbol:'^IXIC', display:'NDQ', name:'Nasdaq Composite', type:'INDICES', price:25067.80, change:-0.19},
+  {symbol:'^DJI', display:'DJI', name:'Dow Jones', type:'INDICES', price:48941.90, change:-1.13},
+  {symbol:'AAPL', display:'AAPL', name:'Apple Inc.', type:'STOCKS', price:276.83, change:-1.18},
+  {symbol:'TSLA', display:'TSLA', name:'Tesla Inc.', type:'STOCKS', price:392.51, change:0.43},
+  {symbol:'NVDA', display:'NVDA', name:'NVIDIA Corp.', type:'STOCKS', price:184.20, change:1.12},
+  {symbol:'MSFT', display:'MSFT', name:'Microsoft', type:'STOCKS', price:521.44, change:0.28},
+  {symbol:'BTC-USD', display:'BTC', name:'Bitcoin', type:'CRYPTO', price:80540.12, change:0.88},
+  {symbol:'GC=F', display:'GOLD', name:'Gold Futures', type:'FUTURES', price:4544.71, change:0.45},
+  {symbol:'CL=F', display:'OIL', name:'WTI Crude Oil', type:'FUTURES', price:104.20, change:-0.88},
+  {symbol:'DX-Y.NYB', display:'DXY', name:'US Dollar Index', type:'FOREX', price:98.47, change:-0.01}
+];
+const recs = [
+  {symbol:'SPY', name:'S&P 500 ETF', rating:'CORE WATCH', reason:'Broad market exposure. Best when the market is risk-on and indexes reclaim strength.', risk:'Medium'},
+  {symbol:'QQQ', name:'Nasdaq 100 ETF', rating:'GROWTH', reason:'Tech-heavy momentum vehicle. Strong when AI and mega-cap earnings lead the market.', risk:'High'},
+  {symbol:'AAPL', name:'Apple Inc.', rating:'QUALITY', reason:'Mega-cap brand with huge liquidity. Watch for clean breakouts after news or earnings digestion.', risk:'Medium'},
+  {symbol:'NVDA', name:'NVIDIA Corp.', rating:'AI LEADER', reason:'AI theme leader with high volatility. Great for watchlist, but entries need tight risk planning.', risk:'High'},
+  {symbol:'MSFT', name:'Microsoft', rating:'BLUE CHIP', reason:'Cloud and AI exposure with a cleaner large-cap profile than many hype names.', risk:'Medium'},
+  {symbol:'BTC', name:'Bitcoin', rating:'RISK-ON', reason:'Useful for reading risk appetite. When crypto runs, speculative money is usually active.', risk:'Very High'},
+  {symbol:'GOLD', name:'Gold Futures', rating:'HEDGE', reason:'Watch when markets get nervous, dollar weakens, or rate expectations shift.', risk:'Medium'},
+  {symbol:'CASH', name:'Cash / No Trade', rating:'DEFENSE', reason:'Sometimes the best position is waiting. Protect capital when the chart is messy.', risk:'Low'}
+];
+const newsItems = [
+  ['Market structure','Major indexes remain the first read: if SPX and Nasdaq are weak together, stay cautious on longs.'],
+  ['Technology','AI names can move the whole tape. Watch NVDA, MSFT, AAPL, and semiconductors for leadership.'],
+  ['Macro','Dollar, yields, gold, and oil can flip intraday sentiment fast. Avoid trading blind into big news.'],
+  ['Execution','Plan entries before the bell. Use stops, avoid revenge trades, and stop after your daily goal.']
+];
+let selected = '^GSPC';
+function fmt(n){return n>999 ? n.toLocaleString(undefined,{maximumFractionDigits:2}) : n.toFixed(2)}
+function cls(n){return n>=0?'pos':'neg'}
+function genSeries(asset){let n=80, arr=[], base=asset.price, drift=asset.change/100, v=base*(1-drift*.8);for(let i=0;i<n;i++){let wave=Math.sin(i/7)*base*.0025;let noise=(Math.random()-.48)*base*.003;v += base*drift/n + wave*.08 + noise;arr.push(Math.max(v,base*.88))}arr[n-1]=asset.price;return arr}
+assets.forEach(a=>a.series=genSeries(a));
+function drawTape(){const row=assets.map(a=>`<span>${a.display} ${fmt(a.price)} <b class="${cls(a.change)}">${a.change>0?'+':''}${a.change.toFixed(2)}%</b></span>`).join('');document.getElementById('tape').innerHTML=row+row}
+function drawTabs(){document.getElementById('tabs').innerHTML=assets.slice(0,5).map(a=>`<button class="tab ${a.symbol===selected?'active':''}" onclick="selectAsset('${a.symbol}')"><div class="tab-top"><span>${a.display}</span><span class="${cls(a.change)}">${a.change>0?'+':''}${a.change.toFixed(2)}%</span></div><strong>${fmt(a.price)}</strong><div class="status">${a.name}</div></button>`).join('')}
+function drawWatch(){const groups=[...new Set(assets.map(a=>a.type))];document.getElementById('watchlist').innerHTML=groups.map(g=>`<div class="watch-section"><h4>${g}</h4>${assets.filter(a=>a.type===g).map(a=>`<div class="watch-row" onclick="selectAsset('${a.symbol}')"><div class="sym">${a.display}</div><div>${a.name}</div><div>${fmt(a.price)}</div><div class="${cls(a.change)}">${a.change>0?'+':''}${a.change.toFixed(2)}%</div></div>`).join('')}</div>`).join('')}
+function drawChart(){const a=assets.find(x=>x.symbol===selected)||assets[0], data=a.series, min=Math.min(...data), max=Math.max(...data), pad=(max-min)||1;let points=data.map((v,i)=>`${(i/(data.length-1))*1000},${330-((v-min)/pad)*285}`).join(' ');let area=`0,340 ${points} 1000,340`;let color=a.change>=0?'#25d695':'#ff4c5f';document.getElementById('chart').innerHTML=`<defs><linearGradient id="fill" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="${color}" stop-opacity=".25"/><stop offset="100%" stop-color="${color}" stop-opacity="0"/></linearGradient></defs><g stroke="rgba(255,255,255,.07)" stroke-width="1">${[60,130,200,270,340].map(y=>`<line x1="0" y1="${y}" x2="1000" y2="${y}"/>`).join('')}</g><polyline points="${area}" fill="url(#fill)" stroke="none"></polyline><polyline points="${points}" fill="none" stroke="${color}" stroke-width="3" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"></polyline>`;document.getElementById('chartTitle').textContent=a.name;document.getElementById('selectedInfo').innerHTML=`${a.display} is at <b>${fmt(a.price)}</b>, moving <b class="${cls(a.change)}">${a.change>0?'+':''}${a.change.toFixed(2)}%</b> today.`;document.getElementById('heroSymbol').textContent=a.display;document.getElementById('heroPrice').textContent=fmt(a.price)}
+function drawRecs(){document.getElementById('recommendGrid').innerHTML=recs.map(r=>`<article class="card rec"><div class="ticker-row"><div><div class="ticker">${r.symbol}</div><div class="status">${r.name}</div></div><span class="rating">${r.rating}</span></div><p>${r.reason}</p><div class="risk">Risk: ${r.risk}</div></article>`).join('')}
+function drawNews(){document.getElementById('news').innerHTML=newsItems.map(n=>`<div class="news"><small>${n[0]}</small><h4>${n[1]}</h4></div>`).join('')}
+function pulse(){const sp=assets[0].change, nq=assets[1].change, btc=assets.find(a=>a.display==='BTC').change;let risk=Math.max(0,Math.min(100,Math.round(55+(sp+nq+btc/2)*12)));let tech=Math.max(0,Math.min(100,Math.round(55+nq*16)));document.getElementById('risk').textContent=risk+'/100';document.getElementById('tech').textContent=tech+'/100';document.getElementById('bias').textContent=(sp+nq)>=0?'Bullish':'Cautious';document.getElementById('pulseBar').style.width=risk+'%'}
+function clock(){document.getElementById('clock').textContent=new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}
+function selectAsset(sym){selected=sym;drawTabs();drawChart()}
+async function liveRefresh(){document.getElementById('status').textContent='Checking live quote API in background...';try{await Promise.all(assets.slice(0,8).map(async a=>{const url=`https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(a.symbol)}?range=1d&interval=5m`;const res=await fetch(cors(url),{cache:'no-store'});const json=await res.json();const r=json.chart.result?.[0];if(!r)return;const meta=r.meta;const closes=(r.indicators.quote[0].close||[]).filter(Boolean);if(meta.regularMarketPrice){a.price=meta.regularMarketPrice}if(meta.chartPreviousClose&&a.price){a.change=((a.price-meta.chartPreviousClose)/meta.chartPreviousClose)*100}if(closes.length>5){a.series=closes.slice(-90)}}));document.getElementById('status').textContent='Live quotes refreshed. Some free data can still be delayed.'}catch(e){document.getElementById('status').textContent='Fast mode active. Live API was slow or blocked, so fallback data stayed loaded.'}drawAll(false)}
+function drawAll(includeStatic=true){drawTape();drawTabs();drawWatch();drawChart();pulse();clock();if(includeStatic){drawRecs();drawNews()}}
+document.querySelectorAll('.pill').forEach(p=>p.onclick=()=>{document.querySelectorAll('.pill').forEach(x=>x.classList.remove('active'));p.classList.add('active')});
+document.getElementById('search').addEventListener('keydown',e=>{if(e.key==='Enter'){const q=e.target.value.trim().toUpperCase();const found=assets.find(a=>a.display===q||a.symbol.replace('^','')===q);if(found)selectAsset(found.symbol)}});
 
-	.tradingview-widget-copyright .blue-text {
-		color: #2962FF !important;
-	}
+function openJoin(){document.getElementById('joinModal').classList.add('show')}
+function closeJoin(){document.getElementById('joinModal').classList.remove('show')}
+function modalBackdrop(e){if(e.target.id==='joinModal')closeJoin()}
+function saveLead(lead){const leads=JSON.parse(localStorage.getItem('elianoLeads')||'[]');leads.push({...lead,date:new Date().toISOString()});localStorage.setItem('elianoLeads',JSON.stringify(leads));return leads.length}
+function submitJoin(e,modal=false){e.preventDefault();const lead=modal?{name:document.getElementById('modalName').value,email:document.getElementById('modalEmail').value,message:document.getElementById('modalMessage').value}:{name:document.getElementById('joinName').value,email:document.getElementById('joinEmail').value,experience:document.getElementById('joinExperience').value,interest:document.getElementById('joinInterest').value,message:document.getElementById('joinMessage').value};const count=saveLead(lead);const id=modal?'modalNotice':'joinNotice';document.getElementById(id).textContent=`Request saved. You now have ${count} saved join request${count===1?'':'s'} in this browser.`;document.getElementById(id).classList.add('show');}
+async function lookupTicker(){const input=document.getElementById('quoteInput');const out=document.getElementById('quoteResult');const sym=input.value.trim().toUpperCase();if(!sym){out.textContent='Enter a ticker first.';return}out.textContent='Loading quote...';const local=assets.find(a=>a.display===sym||a.symbol.replace('^','')===sym);try{const ysym=sym==='BTC'?'BTC-USD':sym==='GOLD'?'GC=F':sym;const controller=new AbortController();setTimeout(()=>controller.abort(),5000);const url=`https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ysym)}?range=1d&interval=5m`;const res=await fetch(cors(url),{cache:'no-store',signal:controller.signal});const json=await res.json();const r=json.chart.result?.[0];const meta=r?.meta;if(!meta?.regularMarketPrice)throw new Error('No quote');const prev=meta.chartPreviousClose||meta.previousClose||meta.regularMarketPrice;const ch=((meta.regularMarketPrice-prev)/prev)*100;out.innerHTML=`<b>${sym}</b> quote: <b>${fmt(meta.regularMarketPrice)}</b> <span class="${cls(ch)}">${ch>0?'+':''}${ch.toFixed(2)}%</span>. Source: public quote API. Verify with broker.`}catch(err){if(local){out.innerHTML=`API was blocked/slow. Fallback: <b>${local.display}</b> ${fmt(local.price)} <span class="${cls(local.change)}">${local.change>0?'+':''}${local.change.toFixed(2)}%</span>.`}else{out.textContent='Could not load that ticker from the free API. Try AAPL, TSLA, NVDA, SPY, BTC, or GOLD.'}}
+}
+function calcRisk(){const acct=Number(document.getElementById('accountSize').value), pct=Number(document.getElementById('riskPercent').value);const out=document.getElementById('riskResult');if(!acct||!pct){out.textContent='Enter account size and risk percent.';return}const risk=acct*(pct/100);out.innerHTML=`At <b>${pct}%</b> risk on <b>$${acct.toLocaleString()}</b>, max planned loss is <b>$${risk.toFixed(2)}</b>.`}
+function renderLocalWatch(){const list=JSON.parse(localStorage.getItem('elianoWatch')||'[]');document.getElementById('localWatch').innerHTML=list.length?list.map(x=>`<span class="pill" style="display:inline-block;margin:3px">${x}</span>`).join(''):'No saved tickers yet.'}
+function addLocalWatch(){const input=document.getElementById('watchInput');const sym=input.value.trim().toUpperCase();if(!sym)return;const list=JSON.parse(localStorage.getItem('elianoWatch')||'[]');if(!list.includes(sym))list.push(sym);localStorage.setItem('elianoWatch',JSON.stringify(list));input.value='';renderLocalWatch()}
+function copyPhone(){navigator.clipboard?.writeText('(352) 555-0138');const n=document.getElementById('phoneNotice');n.textContent='Phone number copied.';n.classList.add('show')}
 
-	.tradingview-widget-copyright a {
-		text-decoration: none !important;
-		color: #B2B5BE !important;
-	}
-
-	.tradingview-widget-copyright a:visited {
-		color: #B2B5BE !important;
-	}
-
-	.tradingview-widget-copyright a:hover .blue-text {
-		color: #1E53E5 !important;
-	}
-
-	.tradingview-widget-copyright a:active .blue-text {
-		color: #1848CC !important;
-	}
-
-	.tradingview-widget-copyright a:visited .blue-text {
-		color: #2962FF !important;
-	}
-	</style></div>
-  </div>
-
-  <main>
-    <section class="hero container" id="home">
-      <div class="eyebrow">Trusted by 1,000+ traders worldwide</div>
-
-      <h1>
-        I Lost $47,000 Trading Before Discovering This
-        <span class="accent">Simple 4-Step System</span>
-        That Changed Everything For Me
-      </h1>
-
-      <p class="subtext">
-        I went from checking my bank account every morning stressed out,
-        to trading with clarity, confidence, and a repeatable process that
-        actually makes sense.
-      </p>
-
-      
-
-      <a class="hero-btn" href="prices.html">I'm Ready To Master Trading In 90 Days! →</a>
-
-      <div class="stats">
-        <div class="stat">Gain clarity, confidence, and consistency</div>
-        <div class="stat">4.8/5 rating | 1,023+ students</div>
-        <div class="stat">Over 1,000 traders transformed</div>
-        <div class="stat">Average time to profitability: 3–6 months</div>
-      </div>
-    </section>
-
-    <section class="section container" id="about">
-      <h2 class="section-title">
-        Stop Guessing. Start Following A
-        <span class="accent">Simple Structure</span>
-      </h2>
-
-      <p class="section-copy">
-        Most traders are not failing because they are lazy. They are failing because
-        they are overloaded, inconsistent, and constantly switching strategies.
-        The goal is to simplify the process so you can finally execute with confidence.
-      </p>
-
-      <div class="grid">
-        <div class="card">
-          <h3>Why Most Traders Stay Stuck</h3>
-          <ul>
-            <li>They consume endless content without a real plan.</li>
-            <li>They jump from one strategy to another every week.</li>
-            <li>They enter trades emotionally instead of systematically.</li>
-            <li>They never build a routine they can repeat.</li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <h3>What Changes Everything</h3>
-          <p>
-            A simple framework. Clear rules. Better risk management.
-            And a repeatable process you can actually follow in live market conditions
-            without feeling overwhelmed every day.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section container" id="reviews">
-      <h2 class="section-title">
-        Real Results From Traders Who Needed
-        <span class="accent">More Than Motivation</span>
-      </h2>
-
-      <p class="section-copy">
-        The difference is not hype. It is clarity, execution, and having a process
-        that removes the constant second-guessing.
-      </p>
-
-      <div class="testimonials">
-        <div class="card">
-          <p class="quote">
-            “For the first time, trading actually feels simple. I stopped overthinking
-            every entry and started following a real plan.”
-          </p>
-          <div class="person">— Alex R | Student</div>
-        </div>
-
-        <div class="card">
-          <p class="quote">
-            “I used to bounce between strategies every week. Now I have one structure
-            and I finally feel consistent.”
-          </p>
-          <div class="person">— Jordan M | Member</div>
-        </div>
-
-        <div class="card">
-          <p class="quote">
-            “This helped me cut out the noise. Less chart addiction, better decisions,
-            and way more confidence in my process.”
-          </p>
-          <div class="person">— Marcus T | Trader</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="cta-area container" id="join">
-      <div class="cta-box">
-        <h2 class="section-title" style="margin-bottom: 0;">
-          Ready To Transform Your
-          <span class="accent">Trading Process?</span>
-        </h2>
-
-        <p>
-          If you are tired of confusion, random entries, and feeling lost every time
-          you open the charts, this is your chance to follow a system that is actually
-          built for clarity and execution.
-        </p>
-
-        <a class="hero-btn" href="prices.html">Apply Now →</a>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    © 2026 Eliano Trading. All rights reserved.
-  </footer>
+drawAll();renderLocalWatch();setInterval(clock,1000);setTimeout(liveRefresh,500);
+</script>
 
 
 </body></html>
